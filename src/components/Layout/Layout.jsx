@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import {  Outlet, useNavigate } from 'react-router-dom';
 import styles from './Layout.module.css';
 import { Suspense } from "react";
 import {Avatar, Button, message, Modal, Tooltip} from "antd";
@@ -8,6 +8,7 @@ import { useUser } from "../../redux/useUser";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/userSlice";
 import {UpdateProfileModal} from "../UpdateProfileModal/UpdateProfileModal";
+import {CustomNavLink} from "../CustomNavLink/CustomLink";
 
 export const Layout = () => {
     const dispatch = useDispatch();
@@ -47,39 +48,12 @@ export const Layout = () => {
                     <nav>
                         <ul className={styles.navList}>
 
-                            {user ? (
-                                <li>
-                                    <NavLink
-                                        to="/"
-                                        className={({isActive}) =>
-                                            isActive ? `${styles.link} ${styles.active}` : styles.link
-                                        }
-                                    >
-                                        Chat Room
-                                    </NavLink>
-                                </li>
+                            {user ? (< CustomNavLink link="/" text="Chat Room"/>
+
                             ) : (
                                 <>
-                                    <li>
-                                        <NavLink
-                                            to="/signup"
-                                            className={({isActive}) =>
-                                                isActive ? `${styles.link} ${styles.active}` : styles.link
-                                            }
-                                        >
-                                            Sign Up
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink
-                                            to="/signin"
-                                            className={({isActive}) =>
-                                                isActive ? `${styles.link} ${styles.active}` : styles.link
-                                            }
-                                        >
-                                            Login
-                                        </NavLink>
-                                    </li>
+                                    < CustomNavLink link="/signup" text="Sign Up"/>
+                                    < CustomNavLink link="/signin" text="Login"/>
                                 </>
                             )}
                         </ul>
@@ -100,7 +74,7 @@ export const Layout = () => {
                 </div>
                 </div>
             </header>
-            <main className={styles.container}>
+            <main className={`${styles.container} ${styles.main}` }>
                 <Suspense fallback={<div>Loading...</div>}>
                     <Outlet/>
                 </Suspense>

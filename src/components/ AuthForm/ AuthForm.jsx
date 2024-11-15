@@ -17,7 +17,7 @@ export const AuthForm = ({ apiMethod, buttonText, title, linkText, linkTo, linkC
                 return message.error(data?.error);
             }
             message.success(`${title} successful!`);
-            linkChat &&  navigate(linkChat);
+            navigate(linkChat?? "/signin");
         } catch (error) {
             let errorAxios = error.response.data?.message?? `${title} failed!`
             if (error.response?.status === 401) {

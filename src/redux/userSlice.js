@@ -3,7 +3,7 @@ import {ApiService} from "../service/api";
 
 
 export const updateUser = createAsyncThunk(
-    'user/userDetails',
+    'user/updateUser',
     async (updateUser, { rejectWithValue }) => {
         try {
             const user = await ApiService.updateProfileUser(updateUser);
